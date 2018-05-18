@@ -9,5 +9,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="社区"/>
+        android:text="发现栏目"/>
 </LinearLayout>

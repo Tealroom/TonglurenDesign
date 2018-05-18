@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         viewpager.setCurrentItem(1);//社区
                         return true;
                     case R.id.navigation_notifications:
-                        viewpager.setCurrentItem(3);//购物车
+                        viewpager.setCurrentItem(2);//购物车
                         return true;
                     case R.id.navigation_personal:
-                        viewpager.setCurrentItem(4);//我的
+                        viewpager.setCurrentItem(3);//我的
                         return true;
                 }
                 return false;
