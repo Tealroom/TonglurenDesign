@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">TonglurenDesign</string>
+    <string name="app_name">Travel_framework</string>
+    <string name="title_activity_test_main">TestMainActivity</string>
+    <string name="title_home">首页</string>
+    <string name="title_dashboard">发现</string>
+    <string name="title_notifications">通知</string>
+    <string name="title_personal">我的</string>
+    <string name="title_activity_base_fragment">BaseFragment</string>
 </resources>
