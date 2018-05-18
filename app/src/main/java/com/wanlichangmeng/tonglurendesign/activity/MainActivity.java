@@ -106,10 +106,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         viewpager.setCurrentItem(1);//社区
                         return true;
                     case R.id.navigation_notifications:
-                        viewpager.setCurrentItem(2);//购物车
+                        viewpager.setCurrentItem(3);//购物车
                         return true;
                     case R.id.navigation_personal:
-                        viewpager.setCurrentItem(3);//我的
+                        viewpager.setCurrentItem(4);//我的
                         return true;
                 }
                 return false;
@@ -139,20 +139,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //禁止ViewPager滑动 这里解开之后会有个错误就是首页的HomeFragment里面的viewPage会和这个viewPage搞混淆_在右划到头的时候。
-//        viewpager.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                Log.i("zhoucaizhid","jinlaile");
-//                return true;
-//            }
-//        });
+        viewpager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Log.i("zhoucaizhid","jinlaile");
+                return true;
+            }
+        });
 
 
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         //设置左滑栏的监听事件
-        findViewById(R.id.iv_menu).setOnClickListener(clickListener);
-        initLeftMenu();//初始化左边菜单
+//        findViewById(R.id.iv_menu).setOnClickListener(clickListener);
+//        initLeftMenu();//初始化左边菜单
         contentFragment=new ContentFragment();
         //getSupportFragmentManager().beginTransaction().add(R.id.content_frame,contentFragment).commit();
         setWindowStatus();
