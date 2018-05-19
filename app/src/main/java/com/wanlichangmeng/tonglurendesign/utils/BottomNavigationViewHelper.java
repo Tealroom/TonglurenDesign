@@ -1,7 +1,5 @@
 package com.wanlichangmeng.tonglurendesign.utils;
-/**
- * 主要是Mainacitivity使用，为了取消底部菜单栏的shift mode动画和大小变化
- */
+
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -12,7 +10,9 @@ import android.support.design.widget.BottomNavigationView;
 import java.lang.reflect.Field;
 
 /**
- * Created by Administrator on 2017/11/16 0016.
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：主要是Mainacitivity使用，为了取消底部菜单栏的shift mode动画和大小变化
  */
 
 public class BottomNavigationViewHelper {

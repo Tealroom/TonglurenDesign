@@ -29,7 +29,9 @@ import butterknife.Unbinder;
 
 
 /**
- * 首页
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：首页
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
 

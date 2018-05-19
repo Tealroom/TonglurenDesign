@@ -1,12 +1,14 @@
 package com.wanlichangmeng.tonglurendesign.utils;
-/**
- * 主要是Mainacitivity使用，为了禁止ViewPager滑动。
- */
+
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-
+/**
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：主要是Mainacitivity使用，为了禁止ViewPager滑动。
+ */
 public class ViewPagerHelper extends ViewPager{
     private boolean isCanScroll = true;
 

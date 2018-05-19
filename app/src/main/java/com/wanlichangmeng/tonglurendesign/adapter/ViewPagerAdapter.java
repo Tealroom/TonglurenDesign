@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * ViewPagerAdapter
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：MainActicity里面viewpager的适配器
  */
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {

@@ -1,7 +1,5 @@
 package com.wanlichangmeng.tonglurendesign.utils;
-/**
- * 调整activity的显示模式
- */
+
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;
@@ -14,12 +12,11 @@ import android.view.WindowManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-
 /**
- * Created by Administrator on 2017/11/16 0016.
- * Activity的相关工具类
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：调整activity的显示模式
  */
-
 public class ActivityUtils {
 
     /**

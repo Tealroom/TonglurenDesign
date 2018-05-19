@@ -12,7 +12,9 @@ import com.wanlichangmeng.tonglurendesign.R;
 
 
 /**
- * 我的
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：我的
  */
 public class UserFragment extends Fragment  {
 

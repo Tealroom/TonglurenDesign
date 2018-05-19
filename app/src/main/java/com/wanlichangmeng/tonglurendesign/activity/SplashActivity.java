@@ -1,13 +1,16 @@
 package com.wanlichangmeng.tonglurendesign.activity;
-/**
- * 程序最初的入口，用来显示app的logo
- */
+
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import com.wanlichangmeng.tonglurendesign.R;
+/**
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：程序最初的入口，用来显示app的logo
+ */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

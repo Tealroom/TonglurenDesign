@@ -12,7 +12,9 @@ import com.wanlichangmeng.tonglurendesign.R;
 
 
 /**
- * 社区
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：发现
  */
 public class CommunityFragment extends Fragment  {
 

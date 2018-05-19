@@ -11,12 +11,9 @@ import android.view.ViewGroup;
 import com.wanlichangmeng.tonglurendesign.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link MessageFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link MessageFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：消息
  */
 public class MessageFragment extends Fragment {
 

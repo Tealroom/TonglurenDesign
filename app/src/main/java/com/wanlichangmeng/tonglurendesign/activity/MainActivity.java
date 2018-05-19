@@ -1,7 +1,5 @@
 package com.wanlichangmeng.tonglurendesign.activity;
-/**
- * 一级activity，程序最主要的入口,包含了四个大的fragment分别是Home,Community,message,user
- */
+
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -38,7 +36,11 @@ import com.wanlichangmeng.tonglurendesign.utils.ViewPagerHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
+/**
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：一级activity，程序最主要的入口,包含了四个大的fragment分别是Home,Community,message,user
+ */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
