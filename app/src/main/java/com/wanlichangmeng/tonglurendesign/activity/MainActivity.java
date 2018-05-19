@@ -1,16 +1,16 @@
 package com.wanlichangmeng.tonglurendesign.activity;
-
+/**
+ * 一级activity，程序最主要的入口,包含了四个大的fragment分别是Home,Community,
+ */
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.os.Build;
-import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.AppCompatActivity;
 
 import android.util.Log;
 import android.view.Gravity;
@@ -30,7 +30,7 @@ import com.wanlichangmeng.tonglurendesign.adapter.ViewPagerAdapter;
 import com.wanlichangmeng.tonglurendesign.fragment.CommunityFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.ContentFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.HomeFragment;
-import com.wanlichangmeng.tonglurendesign.fragment.ShopCartFragment;
+import com.wanlichangmeng.tonglurendesign.fragment.MessageFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.UserFragment;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 import com.wanlichangmeng.tonglurendesign.utils.BottomNavigationViewHelper;
@@ -41,8 +41,10 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
 
+    //底部菜单栏控件
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
+    //底部菜单选项对应的适配器
     @BindView(R.id.viewpager)
     ViewPager viewpager;
     private MenuItem menuItem;
@@ -85,7 +87,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new CommunityFragment());
-        adapter.addFragment(new ShopCartFragment());
+        adapter.addFragment(new MessageFragment());
         adapter.addFragment(new UserFragment());
         viewpager.setAdapter(adapter);
         viewpager.setCurrentItem(0);
