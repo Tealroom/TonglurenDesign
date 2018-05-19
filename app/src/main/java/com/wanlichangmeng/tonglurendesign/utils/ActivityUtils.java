@@ -1,5 +1,7 @@
 package com.wanlichangmeng.tonglurendesign.utils;
-
+/**
+ * 调整activity的显示模式
+ */
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.graphics.Color;

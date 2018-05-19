@@ -8,9 +8,9 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * 作者：XiaoZhu
- * 时间：2017/11/18 0018 14:43
- * 注释：Tablayout里viewpager的适配器
+ * 作者：周才智
+ * 时间：2018/05/18
+ * 注释：MainActicity下Home里viewpager的适配器
  */
 public class TabFragmentAdapter extends FragmentPagerAdapter {
     private final List<Fragment> mFragmentList;

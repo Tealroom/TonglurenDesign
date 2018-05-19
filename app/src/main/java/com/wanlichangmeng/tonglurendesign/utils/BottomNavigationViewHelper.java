@@ -1,5 +1,7 @@
 package com.wanlichangmeng.tonglurendesign.utils;
-
+/**
+ * 主要是Mainacitivity使用，为了取消底部菜单栏的shift mode动画和大小变化
+ */
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;

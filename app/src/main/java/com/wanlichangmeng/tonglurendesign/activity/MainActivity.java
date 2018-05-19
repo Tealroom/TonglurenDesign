@@ -1,6 +1,6 @@
 package com.wanlichangmeng.tonglurendesign.activity;
 /**
- * 一级activity，程序最主要的入口,包含了四个大的fragment分别是Home,Community,
+ * 一级activity，程序最主要的入口,包含了四个大的fragment分别是Home,Community,message,user
  */
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -34,6 +34,7 @@ import com.wanlichangmeng.tonglurendesign.fragment.MessageFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.UserFragment;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 import com.wanlichangmeng.tonglurendesign.utils.BottomNavigationViewHelper;
+import com.wanlichangmeng.tonglurendesign.utils.ViewPagerHelper;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     BottomNavigationView navigation;
     //底部菜单选项对应的适配器
     @BindView(R.id.viewpager)
-    ViewPager viewpager;
+    ViewPagerHelper viewpager;
     private MenuItem menuItem;
 
     private ContentFragment contentFragment;
@@ -90,6 +91,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(new MessageFragment());
         adapter.addFragment(new UserFragment());
         viewpager.setAdapter(adapter);
+        viewpager.setScanScroll(false);
         viewpager.setCurrentItem(0);
 
         //缓存3个页面，来解决点击“我的”回来，首页空白的问题，
@@ -141,13 +143,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         });
 
         //禁止ViewPager滑动 这里解开之后会有个错误就是首页的HomeFragment里面的viewPage会和这个viewPage搞混淆_在右划到头的时候。
-        viewpager.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                Log.i("zhoucaizhid","jinlaile");
-                return true;
-            }
-        });
+//        viewpager.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                Log.i("zhoucaizhid","jinlaile");
+//                return true;
+//            }
+//        });
 
 
 

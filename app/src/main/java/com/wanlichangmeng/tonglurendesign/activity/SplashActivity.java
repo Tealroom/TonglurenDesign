@@ -1,5 +1,7 @@
 package com.wanlichangmeng.tonglurendesign.activity;
-
+/**
+ * 程序最初的入口，用来显示app的logo
+ */
 import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
