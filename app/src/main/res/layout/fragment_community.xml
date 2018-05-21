@@ -26,7 +26,7 @@
             app:tabIndicatorColor="@color/common_color"
             android:layout_toLeftOf="@+id/iv_fenlei"
             app:tabIndicatorHeight="1dp"
-            app:tabMode="scrollable"
+            app:tabMode="fixed"
             app:tabSelectedTextColor="@color/common_color"
             />
         <ImageView

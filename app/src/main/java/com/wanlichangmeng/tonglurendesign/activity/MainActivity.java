@@ -64,8 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        ActivityUtils.StatusBarLightMode(this);
-        ActivityUtils.setStatusBarColor(this, R.color.common_color);//设置状态栏颜色
+        ActivityUtils.transparencyBar(this);
+        //ActivityUtils.StatusBarLightMode(this);
+        //.setStatusBarColor(this, R.color.common_color);//设置状态栏颜色
         initView();//去掉这句话就是一个典型的底部导航界面
 
     }

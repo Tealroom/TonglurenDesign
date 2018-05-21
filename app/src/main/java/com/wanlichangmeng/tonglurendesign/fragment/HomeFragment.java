@@ -1,23 +1,34 @@
 package com.wanlichangmeng.tonglurendesign.fragment;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
+import com.amap.api.maps.model.MarkerOptions;
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentAdapter;
 
@@ -34,7 +45,7 @@ import butterknife.Unbinder;
  * 时间：2018/05/18
  * 注释：首页
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
  //   public class HomeFragment extends Fragment implements View.OnClickListener {
 //    @BindView(R.id.tablayout)
 //    TabLayout tablayout;
@@ -155,6 +166,14 @@ public class HomeFragment extends Fragment {
     //获取地图控件引用
     @BindView(R.id.map1)
     MapView mMapView;
+
+
+    private MarkerOptions markerOption;
+    private AMap aMap;
+    private MapView mapView;
+    private Marker marker;
+    private LatLng latlng = new LatLng(39.91746, 116.396481);
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -174,6 +193,65 @@ public class HomeFragment extends Fragment {
         ButterKnife.bind(this,view);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
         mMapView.onCreate(savedInstanceState);
+        init();
         return view;
+    }
+    /**
+     * 初始化AMap对象
+     */
+    private void init() {
+
+        if (aMap == null) {
+            aMap = mMapView.getMap();
+            addMarkersToMap();// 往地图上添加marker
+        }
+    }
+
+    /**
+     * 在地图上添加marker
+     */
+    private void addMarkersToMap() {
+        markerOption = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.small))
+                .position(latlng)
+                .title("标题")
+                .snippet("详细信息")
+                .draggable(true);
+        marker = aMap.addMarker(markerOption);
+        aMap.setInfoWindowAdapter(this);
+        View infoWindow = getLayoutInflater().inflate(
+                R.layout.custom_info_window, null);
+       // marker.showInfoWindow();// 设置默认显示一个infowinfow
+    }
+
+    /**
+     * 监听自定义infowindow窗口的infocontents事件回调
+     */
+    @Override
+    public View getInfoContents(Marker marker) {
+
+        View infoContent = getLayoutInflater().inflate(
+                R.layout.custom_info_window, null);
+        render(marker, infoContent);
+        return infoContent;
+    }
+
+    /**
+     * 监听自定义infowindow窗口的infowindow事件回调
+     */
+    @Override
+    public View getInfoWindow(Marker marker) {
+
+        View infoWindow = getLayoutInflater().inflate(
+                R.layout.custom_info_window, null);
+
+        render(marker, infoWindow);
+        return infoWindow;
+    }
+
+    /**
+     * 自定义infowinfow窗口
+     */
+    public void render(Marker marker, View view) {
+
     }
 }
