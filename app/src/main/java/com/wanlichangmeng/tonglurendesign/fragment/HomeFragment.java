@@ -17,13 +17,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
+import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
@@ -45,144 +48,43 @@ import butterknife.Unbinder;
  * 时间：2018/05/18
  * 注释：首页
  */
-public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
- //   public class HomeFragment extends Fragment implements View.OnClickListener {
-//    @BindView(R.id.tablayout)
-//    TabLayout tablayout;
-//    @BindView(R.id.tab_viewpager)
-//    ViewPager tabViewpager;
-//    Unbinder unbinder;
-//    @BindView(R.id.iv_fenlei)
-//    ImageView mIvFenlei;
-//
-//
-//    private List<Fragment> mFragmentArrays = new ArrayList<>();
-//    private List<String> mTabs = new ArrayList<>();
-//    private View view;
-//
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        //解决点击“我的”回来方法二，首页空白的问题，推荐的方法
-//        if (view != null) {
-//            unbinder = ButterKnife.bind(this, view);//必须加，不然报ButterKnife的异常
-//            ViewGroup parent = (ViewGroup) view.getParent();
-//            if (parent != null) {
-//                parent.removeView(view);
-//            }
-//            return view;
-//        }
-//
-//        view = inflater.inflate(R.layout.fragment_home, container, false);
-//
-//        unbinder = ButterKnife.bind(this, view);//这里也得有，不然报ButterKnife的异常
-//
-//        initView(view);
-//        return view;
-//    }
-//
-//    private void initView(View view) {
-//        mIvFenlei.setOnClickListener(this);
-//        tablayout.removeAllTabs();
-//        tabViewpager.removeAllViews();
-//        if (mFragmentArrays != null) {
-//            mFragmentArrays.clear();
-//            mTabs.clear();
-//        }
-//        //替换成从服务器接口请求数据就成动态了
-//        mTabs.add("特惠新品");
-//        mTabs.add("有机果蔬");
-//        mTabs.add("放养牲畜");
-//        mTabs.add("健康吧");
-//        mTabs.add("调味品");
-//        mTabs.add("素食者");
-//        mTabs.add("时令食品");
-//        mTabs.add("野生菌类");
-//        mTabs.add("放养家禽");
-//        mTabs.add("休闲吧");
-//        mTabs.add("粮油类");
-//        mTabs.add("素食类");
-//        mTabs.add("周边菜场");
-//
-//        //动态添加Fragment
-//        for (int i = 0; i < mTabs.size(); i++) {
-//
-//            Fragment fragment = new TabFragment();
-//            Bundle bundle = new Bundle();
-//            bundle.putInt("position", i);
-//            fragment.setArguments(bundle);
-//            mFragmentArrays.add(fragment);
-//        }
-//
-//        tabViewpager.setAdapter(new TabFragmentAdapter(getFragmentManager(), mFragmentArrays, mTabs));
-//
-//
-//        tablayout.setupWithViewPager(tabViewpager);
-//
-//    }
-//
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()) {
-//            case R.id.iv_fenlei:
-//                startPopuwindows(view);
-//                break;
-//        }
-//    }
-//
-//    private void startPopuwindows(View view1) {
-//        View view=LayoutInflater.from(getActivity()).inflate(R.layout.layout_main_popuwindows,null);
-//        RecyclerView recyclerView=view.findViewById(R.id.recycler);
-//        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(),5));
-//        //RecycleViewGridAdapter gridAdapter=new RecycleViewGridAdapter(R.layout.item_gride_fenlei,mTabs);
-//        //recyclerView.setAdapter(gridAdapter);
-//
-//        final PopupWindow popupWindow=new PopupWindow(view, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT,true);
-//        popupWindow.showAsDropDown(view1);
-//
-////        gridAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-////            @Override
-////            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-////                Toast.makeText(getActivity(),"点击了"+mTabs.get(position),Toast.LENGTH_SHORT).show();
-////                tabViewpager.setCurrentItem(position);
-////                popupWindow.dismiss();
-////            }
-////        });
-////        gridAdapter.setOnItemChildClickListener(new BaseQuickAdapter.OnItemChildClickListener() {
-////            @Override
-////            public void onItemChildClick(BaseQuickAdapter adapter, View view, int position) {
-////                tabViewpager.setCurrentItem(position);
-////                popupWindow.dismiss();
-////            }
-////        });
-//    }
-//
-//
-//    @Override
-//    public void onDestroyView() {
-//        super.onDestroyView();
-//        unbinder.unbind();
-//    }
+public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMap.OnMarkerClickListener {
+
     //获取地图控件引用
     @BindView(R.id.map1)
     MapView mMapView;
 
+    @BindView(R.id.fdag)
+    Button btn1;
+
+    @BindView(R.id.main_home_info)
+    LinearLayout info_window;
+//    //获取地图控件引用
+//    @BindView(R.id.main1)
+//    LinearLayout relative;
+
+
 
     private MarkerOptions markerOption;
+    private UiSettings mUiSettings;
     private AMap aMap;
-    private MapView mapView;
     private Marker marker;
-    private LatLng latlng = new LatLng(39.91746, 116.396481);
-
+    private Marker marker1;
+    private LatLng latlng = new LatLng(39.91746, 116.397481);
+    private LatLng latlng1 = new LatLng(39.92746, 116.396481);
+    private LatLng latlng2 = new LatLng(39.88250, 116.409468);
+    private LatLng latlng3 = new LatLng(39.87814, 116.191765);
+    private LatLng latlng4 = new LatLng(39.73481, 116.307089);
+    private LatLng latlng5 = new LatLng(39.78416, 116.399999);
+    private LatLng latlng6 = new LatLng(40.00779, 116.304431);
+    private LatLng latlng7 = new LatLng(40.01384, 116.396730);
+    private LatLng latlng8 = new LatLng(39.98383, 116.497937);
+    private LatLng latlng9 = new LatLng(39.98746, 116.366481);
+    private LatLng latlng10 = new LatLng(39.86390, 116.497245 );
+    //private LatLng latlng11 = new LatLng(34.341568, 108.940174);
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-//        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-//        }
-
 
     }
     @Override
@@ -192,6 +94,9 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         ButterKnife.bind(this,view);
         //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
+
+
+
         mMapView.onCreate(savedInstanceState);
         init();
         return view;
@@ -203,28 +108,95 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
 
         if (aMap == null) {
             aMap = mMapView.getMap();
+            aMap.setOnMarkerClickListener(this);// 设置点击marker事件监听器
+            mUiSettings = aMap.getUiSettings();
+            mUiSettings.setZoomControlsEnabled(false);
             addMarkersToMap();// 往地图上添加marker
+
         }
+        //绑定点击事件监听（这里用的是匿名内部类创建监听）
+        btn1.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
+
+                toast.show();
+
+            }
+        });
+
     }
 
     /**
      * 在地图上添加marker
      */
     private void addMarkersToMap() {
-        markerOption = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.small))
-                .position(latlng)
-                .title("标题")
-                .snippet("详细信息")
+//        markerOption = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
+//                .position(latlng)
+//                .title("标题")
+//                .snippet("详细信息")
+//                .draggable(true);
+//        marker = aMap.addMarker(markerOption);
+//        //aMap.setInfoWindowAdapter(this);
+//
+//        marker.showInfoWindow();// 设置默认显示一个infowinfow
+//        markerOption = new MarkerOptions();
+//        markerOption.position(latlng1);
+//        markerOption.title("西安市").snippet("西安市：34.341568, 108.940174");
+//
+//        markerOption.draggable(true);
+//        marker1 = aMap.addMarker(markerOption);
+//        marker1.showInfoWindow();
+
+
+
+        MarkerOptions markerOption1 = new MarkerOptions()
+                .position(latlng2).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
                 .draggable(true);
-        marker = aMap.addMarker(markerOption);
-        aMap.setInfoWindowAdapter(this);
-        View infoWindow = getLayoutInflater().inflate(
-                R.layout.custom_info_window, null);
-       // marker.showInfoWindow();// 设置默认显示一个infowinfow
+        MarkerOptions markerOption2 = new MarkerOptions()
+                .position(latlng3).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
+                .draggable(true);
+        MarkerOptions markerOption3 = new MarkerOptions()
+                .position(latlng4).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
+                .draggable(true);
+        MarkerOptions markerOption4 = new MarkerOptions()
+                .position(latlng5).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
+                .draggable(true);
+        MarkerOptions markerOption5 = new MarkerOptions()
+                .position(latlng6).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
+                .draggable(true);
+        MarkerOptions markerOption6 = new MarkerOptions()
+                .position(latlng7).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
+                .draggable(true);
+        MarkerOptions markerOption7 = new MarkerOptions()
+                .position(latlng8).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
+                .draggable(true);
+        MarkerOptions markerOption8 = new MarkerOptions()
+                .position(latlng9).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
+                .draggable(true);
+        MarkerOptions markerOption9 = new MarkerOptions()
+                .position(latlng10).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
+                .draggable(true);
+        MarkerOptions markerOption10 = new MarkerOptions()
+                .position(latlng1).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
+                .draggable(true);
+
+        ArrayList<MarkerOptions> markerOptionlst = new ArrayList<MarkerOptions>();
+        markerOptionlst.add(markerOption1);
+        markerOptionlst.add(markerOption2);
+        markerOptionlst.add(markerOption3);
+        markerOptionlst.add(markerOption4);
+        markerOptionlst.add(markerOption5);
+        markerOptionlst.add(markerOption6);
+        markerOptionlst.add(markerOption7);
+        markerOptionlst.add(markerOption8);
+        markerOptionlst.add(markerOption9);
+        markerOptionlst.add(markerOption10);
+        List<Marker> markerlst = aMap.addMarkers(markerOptionlst, true);
     }
 
     /**
-     * 监听自定义infowindow窗口的infocontents事件回调
+     * 监听自定义infowindow窗口的infocontents事件回调,暂时没有用
      */
     @Override
     public View getInfoContents(Marker marker) {
@@ -236,7 +208,7 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
     }
 
     /**
-     * 监听自定义infowindow窗口的infowindow事件回调
+     * 监听自定义infowindow窗口的infowindow事件回调,暂时没有用
      */
     @Override
     public View getInfoWindow(Marker marker) {
@@ -253,5 +225,22 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter {
      */
     public void render(Marker marker, View view) {
 
+    }
+
+    /**
+     * 对marker标注点点击响应事件
+     */
+    @Override
+    public boolean onMarkerClick(final Marker marker) {
+        info_window.setVisibility(View.VISIBLE);
+        if (aMap != null) {
+//            ViewGroup.LayoutParams params=relative.getLayoutParams();
+//            params.height =180;
+//            relative.setLayoutParams(params);
+//            Log.i("jinlaile",Integer.toString(params.height));
+        }
+
+
+        return false;
     }
 }
