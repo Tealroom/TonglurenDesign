@@ -1,5 +1,6 @@
 package com.wanlichangmeng.tonglurendesign.activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -56,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @BindView(R.id.viewpager)
     ViewPagerHelper viewpager;
     private MenuItem menuItem;
-
+    int lastItem;
     private boolean mIsExit;
 
     @Override
@@ -96,15 +97,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 switch (item.getItemId()) {
                     case R.id.navigation_home:
+                        lastItem = 0;
                         viewpager.setCurrentItem(0);//首页
                         return true;
                     case R.id.navigation_dashboard:
+                        lastItem = 1;
                         viewpager.setCurrentItem(1);//社区
                         return true;
+                    case R.id.navigation_Add:
+                        Intent intent = new Intent(MainActivity.this, TripActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                        return true;
                     case R.id.navigation_notifications:
-                        viewpager.setCurrentItem(2);//购物车
+                        lastItem = 3;
+                        viewpager.setCurrentItem(2);//消息
                         return true;
                     case R.id.navigation_personal:
+                        lastItem = 4;
                         viewpager.setCurrentItem(3);//我的
                         return true;
                 }
@@ -180,6 +190,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
 
         }
+    }
+    @Override
+    public void onResume() {
+        super.onResume(); // Always call the superclass method first
+        // Get the Camera instance as the activity achieves full user focus
+        //暂停回来就是回到发布之前
+        if (menuItem != null) {
+            menuItem.setChecked(false);
+        } else {
+            navigation.getMenu().getItem(0).setChecked(false);
+        }
+        menuItem = navigation.getMenu().getItem(lastItem);
+        menuItem.setChecked(true);
     }
 }
 
