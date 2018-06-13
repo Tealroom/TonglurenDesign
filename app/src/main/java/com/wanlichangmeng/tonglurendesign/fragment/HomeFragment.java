@@ -59,28 +59,22 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
 
     @BindView(R.id.main_home_info)
     LinearLayout info_window;
+
+    @BindView(R.id.imageview2)
+    ImageView headDetail;
 //    //获取地图控件引用
 //    @BindView(R.id.main1)
 //    LinearLayout relative;
 
 
 
+    List<Integer> imageId = new ArrayList<Integer>();
     private MarkerOptions markerOption;
     private UiSettings mUiSettings;
     private AMap aMap;
     private Marker marker;
     private Marker marker1;
-    private LatLng latlng = new LatLng(39.91746, 116.397481);
-    private LatLng latlng1 = new LatLng(39.92746, 116.396481);
-    private LatLng latlng2 = new LatLng(39.88250, 116.409468);
-    private LatLng latlng3 = new LatLng(39.87814, 116.191765);
-    private LatLng latlng4 = new LatLng(39.73481, 116.307089);
-    private LatLng latlng5 = new LatLng(39.78416, 116.399999);
-    private LatLng latlng6 = new LatLng(40.00779, 116.304431);
-    private LatLng latlng7 = new LatLng(40.01384, 116.396730);
-    private LatLng latlng8 = new LatLng(39.98383, 116.497937);
-    private LatLng latlng9 = new LatLng(39.98746, 116.366481);
-    private LatLng latlng10 = new LatLng(39.86390, 116.497245 );
+
     //private LatLng latlng11 = new LatLng(34.341568, 108.940174);
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,10 +112,10 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
         btn1.setOnClickListener(new View.OnClickListener(){
             int i = 0;
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
+                //Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
 
-                toast.show();
-
+                //toast.show();
+                info_window.setVisibility(View.GONE);
             }
         });
 
@@ -131,55 +125,54 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
      * 在地图上添加marker
      */
     private void addMarkersToMap() {
-//        markerOption = new MarkerOptions().icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
-//                .position(latlng)
-//                .title("标题")
-//                .snippet("详细信息")
-//                .draggable(true);
-//        marker = aMap.addMarker(markerOption);
-//        //aMap.setInfoWindowAdapter(this);
-//
-//        marker.showInfoWindow();// 设置默认显示一个infowinfow
-//        markerOption = new MarkerOptions();
-//        markerOption.position(latlng1);
-//        markerOption.title("西安市").snippet("西安市：34.341568, 108.940174");
-//
-//        markerOption.draggable(true);
-//        marker1 = aMap.addMarker(markerOption);
-//        marker1.showInfoWindow();
+
+
+
+        imageId.add(R.drawable.user12);
+        imageId.add(R.drawable.user22);
+        imageId.add(R.drawable.user32);
+        imageId.add(R.drawable.user12);
+        imageId.add(R.drawable.user22);
+        imageId.add(R.drawable.user32);
+        imageId.add(R.drawable.user12);
+        imageId.add(R.drawable.user22);
+        imageId.add(R.drawable.user32);
+        imageId.add(R.drawable.user12);
+        List<LatLng> position = new ArrayList<LatLng>();
+        position.add(new LatLng(39.91746, 117.397481));
+        position.add(new LatLng(39.92746, 116.396481));
+        position.add(new LatLng(39.88250, 116.409468));
+        position.add(new LatLng(39.87814, 116.191765));
+        position.add(new LatLng(39.73481, 116.307089));
+        position.add(new LatLng(39.78416, 116.399999));
+        position.add(new LatLng(40.00779, 116.304431));
+        position.add(new LatLng(40.01384, 116.396730));
+        position.add(new LatLng(39.98383, 116.497937));
+        position.add(new LatLng(39.98746, 116.366481));
+
 
 
 
         MarkerOptions markerOption1 = new MarkerOptions()
-                .position(latlng2).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
-                .draggable(true);
+                .draggable(true).title("1");
         MarkerOptions markerOption2 = new MarkerOptions()
-                .position(latlng3).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
-                .draggable(true);
+                .draggable(true).title("2");
         MarkerOptions markerOption3 = new MarkerOptions()
-                .position(latlng4).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
-                .draggable(true);
+                .draggable(true).title("3");
         MarkerOptions markerOption4 = new MarkerOptions()
-                .position(latlng5).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
-                .draggable(true);
+                .draggable(true).title("4");
         MarkerOptions markerOption5 = new MarkerOptions()
-                .position(latlng6).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
-                .draggable(true);
+                .draggable(true).title("5");
         MarkerOptions markerOption6 = new MarkerOptions()
-                .position(latlng7).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
-                .draggable(true);
+                .draggable(true).title("6");
         MarkerOptions markerOption7 = new MarkerOptions()
-                .position(latlng8).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
-                .draggable(true);
+                .draggable(true).title("7");
         MarkerOptions markerOption8 = new MarkerOptions()
-                .position(latlng9).icon(BitmapDescriptorFactory.fromResource(R.drawable.user22))
-                .draggable(true);
+                .draggable(true).title("8");
         MarkerOptions markerOption9 = new MarkerOptions()
-                .position(latlng10).icon(BitmapDescriptorFactory.fromResource(R.drawable.user32))
-                .draggable(true);
+                .draggable(true).title("9");
         MarkerOptions markerOption10 = new MarkerOptions()
-                .position(latlng1).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12))
-                .draggable(true);
+                .draggable(true).title("10");
 
         ArrayList<MarkerOptions> markerOptionlst = new ArrayList<MarkerOptions>();
         markerOptionlst.add(markerOption1);
@@ -192,30 +185,41 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
         markerOptionlst.add(markerOption8);
         markerOptionlst.add(markerOption9);
         markerOptionlst.add(markerOption10);
+
+
+        for (int i=0;i<markerOptionlst.size();i++){
+            markerOptionlst.get(i).position(position.get(i)).icon(BitmapDescriptorFactory.fromResource(imageId.get(i)));
+            Log.i("Window",markerOptionlst.get(i).getTitle());
+        }
         List<Marker> markerlst = aMap.addMarkers(markerOptionlst, true);
+        for (int i=0;i<markerlst.size();i++){
+
+            Log.i("Window",markerlst.get(i).getId());
+        }
     }
 
     /**
-     * 监听自定义infowindow窗口的infocontents事件回调,暂时没有用
+     * 监听自定义infowindow窗口的infocontents事件回调,暂时没有用。没有调用过
      */
     @Override
     public View getInfoContents(Marker marker) {
 
         View infoContent = getLayoutInflater().inflate(
                 R.layout.custom_info_window, null);
+        Log.i("Contents","11111111111111111111111111111111111");
         render(marker, infoContent);
         return infoContent;
     }
 
     /**
-     * 监听自定义infowindow窗口的infowindow事件回调,暂时没有用
+     * 监听自定义infowindow窗口的infowindow事件回调,暂时没有用。没有调用过
      */
     @Override
     public View getInfoWindow(Marker marker) {
 
         View infoWindow = getLayoutInflater().inflate(
                 R.layout.custom_info_window, null);
-
+        Log.i("Window","2222222222222222222222222222222222");
         render(marker, infoWindow);
         return infoWindow;
     }
@@ -233,6 +237,16 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
     @Override
     public boolean onMarkerClick(final Marker marker) {
         info_window.setVisibility(View.VISIBLE);
+        Log.i("Click",marker.getId());
+        ;
+        Integer io=marker.getId().length();
+        Log.i("fdsafdsa",io.toString());
+        Log.i("fdsafdsa",marker.getId().substring(6));
+        Integer.parseInt(marker.getId().substring(6));
+
+
+        headDetail.setImageResource(imageId.get(Integer.parseInt(marker.getId().substring(6))-1));
+
         if (aMap != null) {
 //            ViewGroup.LayoutParams params=relative.getLayoutParams();
 //            params.height =180;
