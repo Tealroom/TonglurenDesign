@@ -33,30 +33,7 @@ import butterknife.Unbinder;
  */
 public class CommunityFragment extends Fragment  implements View.OnClickListener {
 
-//    //获取地图控件引用
-//    @BindView(R.id.map)
-//    MapView mMapView;
-//    @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-////        if (getArguments() != null) {
-////            mParam1 = getArguments().getString(ARG_PARAM1);
-////            mParam2 = getArguments().getString(ARG_PARAM2);
-////        }
-//
-//
-//    }
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//
-//        View view = inflater.inflate(R.layout.fragment_community, container, false);
-//        ButterKnife.bind(this,view);
-//        //在activity执行onCreate时执行mMapView.onCreate(savedInstanceState)，创建地图
-//        mMapView.onCreate(savedInstanceState);
-//        return view;
-//    }
+
     @BindView(R.id.tablayout)
     TabLayout tablayout;
     @BindView(R.id.tab_viewpager)

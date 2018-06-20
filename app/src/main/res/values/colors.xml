@@ -29,4 +29,8 @@
     <!--统一的颜色end-->
     <color name="white">#ffffff</color>
 
+
+
+    <color name="colorBlueStatus">#1680E2</color>
+
 </resources>

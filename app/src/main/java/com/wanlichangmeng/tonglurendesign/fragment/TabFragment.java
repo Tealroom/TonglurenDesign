@@ -3,15 +3,27 @@ package com.wanlichangmeng.tonglurendesign.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.wanlichangmeng.tonglurendesign.MyApplication;
 import com.wanlichangmeng.tonglurendesign.R;
+import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentListAdapter;
+import com.wanlichangmeng.tonglurendesign.utils.Updating;
 //import com.youth.banner.Banner;
 //import com.youth.banner.listener.OnBannerListener;
+
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
+import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
+import static android.support.v7.widget.RecyclerView.VERTICAL;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,14 +38,25 @@ import butterknife.Unbinder;
 
 public class TabFragment extends Fragment {
 
-    @BindView(R.id.recycler)
-    RecyclerView mRecyclerView;
+
     Unbinder unbinder;
     private List<String> mdata = new ArrayList<>();
     private List<String> imageUrl = new ArrayList<>();
     int mPosition;
 //    private RecycleViewAdapter mAdapter;
 //    private Banner mBanner;
+
+    //动态列表
+    @BindView(R.id.discover_recyclerView)
+    protected RecyclerView mRecyclerView;
+    @BindView(R.id.swipeRefreshLayout)
+    protected SwipeRefreshLayout swipeRefreshLayout;
+
+    private TabFragmentListAdapter adapter;
+    private List<Updating> data;
+    private RecyclerView.OnScrollListener mOnScrollListener;
+
+    private boolean isLoading;
 
     @Nullable
     @Override
@@ -60,6 +83,87 @@ public class TabFragment extends Fragment {
 //        mAdapter.addHeaderView(top);
 //        mRecyclerView.setAdapter(mAdapter);
 
+
+
+        //动态列表
+        data = new ArrayList<>();
+        adapter = new TabFragmentListAdapter(MyApplication.getInstance(), data);
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorBlueStatus);
+        swipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!isLoading) {
+                    isLoading = true;
+                    data.clear();
+                    Log.e("vvv", "was clear"+data.size());
+                    getData();
+                }
+            }
+        });
+
+        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(MyApplication.getInstance());
+        mRecyclerView.setLayoutManager(linearLayoutManager);
+//        recyclerView.addItemDecoration(new DividerItemDecoration(this, VERTICAL));
+        mRecyclerView.setAdapter(adapter);
+        mOnScrollListener = new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                switch (newState) {
+                    case SCROLL_STATE_IDLE:
+                        Glide.with(MyApplication.getInstance()).resumeRequests();
+                        break;
+                    case SCROLL_STATE_DRAGGING:
+                    case SCROLL_STATE_SETTLING:
+                        Glide.with(MyApplication.getInstance()).pauseRequests();
+                        break;
+                }
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
+                if (lastVisibleItemPosition + 5 >= adapter.getItemCount()) {
+                    boolean isRefreshing = swipeRefreshLayout.isRefreshing();
+                    if (isRefreshing) {
+                        adapter.notifyItemRemoved(adapter.getItemCount());
+                        return;
+                    }
+                    if (!isLoading) {
+                        isLoading = true;
+                        getData();
+                    }
+                }
+            }
+        };
+        mRecyclerView.addOnScrollListener(mOnScrollListener);
+        if (!isLoading) {
+            isLoading = true;
+            getData();
+        }
+
+    }
+
+    private void getData() {
+        Updating person = new Updating("riv", "http://cdn.duitang.com/uploads/item/201507/08/20150708222949_nhxQk.thumb.224_0.png", "http://cdn.duitang.com/uploads/item/201207/03/20120703165612_efPys.thumb.700_0.jpeg");
+        for (int i = 0; i < 10; i++) {
+            data.add(person);
+            if (i == 9) {
+                isLoading = false;
+                adapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+                adapter.notifyItemRemoved(adapter.getItemCount());
+                Log.e("vvv","===========total: "+data.size());
+            }
+        }
     }
 
     private void initData() {

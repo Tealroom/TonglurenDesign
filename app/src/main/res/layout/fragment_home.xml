@@ -22,24 +22,32 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@color/white">
-            <ImageView
-                android:id="@+id/btn_notice_message"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                android:paddingLeft="12dp"
-                android:paddingRight="12dp"
-                android:src="@drawable/zoom46"/>
-            <TextView
-                android:id="@+id/edt_search"
-                android:layout_width="0.0dp"
-                android:layout_height="31dp"
-                android:layout_weight="1"
-                android:background="@drawable/home_search_shape"
-                android:gravity="center_vertical"
-                android:hint="这里是一些字体"
-                android:lines="1"
-               />
+
+
+                <com.ruffian.library.widget.REditText
+                    android:id="@+id/fragment_home_btn_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="这里是一些字体"
+                    android:lines="1"
+                    android:layout_margin="5dp"
+                    android:padding="10dp"
+                    app:border_color_normal="@color/common_text_black"
+                    app:border_width_normal="1dp"
+                    app:corner_radius="20dp"
+                    app:icon_src_normal="@drawable/zoom46"
+                    app:icon_direction="left"
+                    app:icon_height="15dp"
+                    app:icon_width="15dp"
+                    android:focusable="false"
+                    />
+
+
+
+
+
+
 
 
             <Button
@@ -57,18 +65,20 @@
             android:background="@drawable/arrows64"/>
 
         <LinearLayout
-            android:id="@+id/main_home_info"
+            android:id="@+id/fragment_home_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:orientation="vertical"
             android:padding="5dp"
-            android:visibility="gone">
+            android:visibility="invisible">
 
             <include
                 layout="@layout/custom_info_window" />
 
+
         </LinearLayout>
+
     </FrameLayout>
 
 

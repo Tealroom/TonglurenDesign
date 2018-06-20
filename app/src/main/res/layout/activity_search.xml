@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.SearchActivity">
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/activity_search_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white_normal">
+        <com.ruffian.library.widget.REditText
+            android:id="@+id/activity_search_edit"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="这里是一些字体"
+            android:lines="1"
+            android:layout_margin="5dp"
+            android:padding="10dp"
+            android:background="@color/white"
+            app:layout_constraintRight_toLeftOf="@+id/activity_search_btn1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:border_color_normal="@color/common_text_black"
+            app:border_width_normal="1dp"
+            app:corner_radius="20dp"
+            app:icon_src_normal="@drawable/zoom46"
+            app:icon_direction="left"
+            app:icon_height="15dp"
+            app:icon_width="15dp"
+            />
+
+        <Button
+            android:id="@+id/activity_search_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="搜索"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+
+
+    </android.support.constraint.ConstraintLayout>
+    <android.support.constraint.ConstraintLayout
+
+        android:id="@+id/activity_search_midden"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/activity_search_top"
+        >
+        <TextView
+            android:id="@+id/activity_search_midden_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="热搜"/>
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:scrollbars="none"
+            app:layout_constraintTop_toBottomOf="@id/activity_search_midden_top"/>
+
+    </android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

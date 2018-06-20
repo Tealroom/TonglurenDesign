@@ -7,7 +7,7 @@
 
 
     <Button
-        android:id="@+id/fdag"
+        android:id="@+id/fragment_home_info_btn_retract"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="收起"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
-            android:id="@+id/imageview2"
+            android:id="@+id/fragment_home_info_avatar"
             android:layout_width="80dp"
             android:layout_height="80dp"
             android:background="#FFF"
@@ -28,25 +28,25 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/imageview2"
+            android:layout_toRightOf="@id/fragment_home_info_avatar"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtOne1"
+                android:id="@+id/fragment_home_info_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="caizhi.zhou"
                 android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/txtOne2"
+                android:id="@+id/fragment_home_info_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="约个冒菜什么额的"
                 android:textSize="18sp" />
 
             <ImageView
-                android:id="@+id/imageview3"
+                android:id="@+id/fragment_home_info_travelMode"
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:background="#FFF"
@@ -62,13 +62,13 @@
             android:layout_alignParentRight="true"
             >
             <TextView
-                android:id="@+id/txtOne3"
+                android:id="@+id/fragment_home_info_travelType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="双人出行"
                 android:textSize="18sp" />
             <ImageView
-                android:id="@+id/imageview4"
+                android:id="@+id/fragment_home_info_status"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:background="#FFF"
@@ -84,7 +84,7 @@
         android:layout_height="1px"
         android:background="@color/launcher_item_normal"></View>
     <TextView
-        android:id="@+id/txtOne"
+        android:id="@+id/fragment_home_info_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
