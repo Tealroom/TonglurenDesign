@@ -9,9 +9,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -55,6 +57,7 @@ import com.wanlichangmeng.tonglurendesign.activity.MainActivity;
 import com.wanlichangmeng.tonglurendesign.activity.SearchActivity;
 import com.wanlichangmeng.tonglurendesign.activity.TripActivity;
 import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentAdapter;
+import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -71,7 +74,8 @@ import butterknife.Unbinder;
  * 注释：首页
  */
 public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMap.OnMarkerClickListener {
-
+    @BindView(R.id.ll_bar4)
+    LinearLayout ll_bar4;
     //获取地图控件引用
     @BindView(R.id.map1)
     MapView mMapView;
@@ -564,5 +568,15 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
 
 
         return false;
+    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onResume() {
+        ActivityUtils.initStateInFragment(this,ll_bar4);
+//        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
+//        tintManager.setStatusBarTintEnabled(true);
+//        tintManager.setStatusBarTintResource(R.color.colorPrimary);//设置系统状态栏颜色
+//        tintManager.setStatusBarTintDrawable(getResources().getDrawable(R.drawable.mybgcolor_02));//设置系统状态栏背景图
+        super.onResume();
     }
 }

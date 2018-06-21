@@ -2,11 +2,17 @@ package com.wanlichangmeng.tonglurendesign.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.RequiresApi;
+import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.Fragment;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 //import com.readystatesoftware.systembartint.SystemBarTintManager;
 
@@ -38,6 +44,93 @@ public class ActivityUtils {
             Window window =activity.getWindow();
             window.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS,
                     WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+    }
+    /**
+     * 动态的设置Fragment状态栏  实现沉浸式状态栏
+     *
+     */
+    //@RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static void initStateInFragment(Fragment fragment, LinearLayout linear_bar) {
+
+        //当系统版本为4.4或者4.4以上时可以使用沉浸式状态栏
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            fragment.getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //透明状态栏
+            fragment.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //需要设置这个 flag 才能调用 setStatusBarColor 来设置状态栏颜色
+            fragment.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+//            fragment.getActivity().getWindow().setFlags(
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION,
+//                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //透明导航栏
+//            fragment.getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            //
+//            LinearLayout linear_bar = (LinearLayout) findViewById(R.id.ll_bar);
+
+            //获取到状态栏的高度
+            int statusHeight = getStatusBarHeightInFragment(fragment);
+            //动态的设置隐藏布局的高度
+            ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) linear_bar.getLayoutParams();
+            params.height = statusHeight;
+            linear_bar.setLayoutParams(params);
+//            linear_bar.setBackground(fragment.getActivity().getDrawable(android.R.drawable.bottom_bar));
+            linear_bar.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 通过反射的方式获取Fragment状态栏高度
+     *
+     * @return
+     */
+    public static int getStatusBarHeightInFragment(Fragment fragment) {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return fragment.getActivity().getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    /**
+     * 通过反射的方式获取状态栏高度
+     *
+     * @return
+     */
+    public static int getStatusBarHeightInAcvitity(Activity activity) {
+        try {
+            Class<?> c = Class.forName("com.android.internal.R$dimen");
+            Object obj = c.newInstance();
+            Field field = c.getField("status_bar_height");
+            int x = Integer.parseInt(field.get(obj).toString());
+            return activity.getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    /**
+     * 获取状态栏的高度
+     */
+    public static int getStatusBarHeight(Activity activity) {
+        Resources resources = activity.getResources();
+        int statusBarHeightId = resources.getIdentifier("status_bar_height", "dimen", "android");
+        return resources.getDimensionPixelOffset(statusBarHeightId);
+    }
+
+
+    /**
+     * 修改状态来字体颜色
+     */
+    public static void setStatusBarTextColor(Activity activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.getWindow().getDecorView().setSystemUiVisibility(
+                    View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 

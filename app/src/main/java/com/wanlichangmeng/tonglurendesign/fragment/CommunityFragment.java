@@ -2,7 +2,9 @@ package com.wanlichangmeng.tonglurendesign.fragment;
 
 
 
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -12,11 +14,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.amap.api.maps.MapView;
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentAdapter;
+import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +45,8 @@ public class CommunityFragment extends Fragment  implements View.OnClickListener
     Unbinder unbinder;
     @BindView(R.id.iv_fenlei)
     ImageView mIvFenlei;
-
+    @BindView(R.id.ll_bar4)
+    LinearLayout ll_bar4;
 
     private List<Fragment> mFragmentArrays = new ArrayList<>();
     private List<String> mTabs = new ArrayList<>();
@@ -139,6 +144,17 @@ public class CommunityFragment extends Fragment  implements View.OnClickListener
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void onResume() {
+        ActivityUtils.initStateInFragment(this,ll_bar4);
+//        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
+//        tintManager.setStatusBarTintEnabled(true);
+//        tintManager.setStatusBarTintResource(R.color.colorPrimary);//设置系统状态栏颜色
+//        tintManager.setStatusBarTintDrawable(getResources().getDrawable(R.drawable.mybgcolor_02));//设置系统状态栏背景图
+        super.onResume();
     }
 
 

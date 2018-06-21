@@ -4,37 +4,25 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 
-import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.MotionEvent;
-import android.view.View.OnClickListener;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 
-import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.adapter.ViewPagerAdapter;
 import com.wanlichangmeng.tonglurendesign.fragment.CommunityFragment;
-import com.wanlichangmeng.tonglurendesign.fragment.ContentFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.HomeFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.MessageFragment;
 import com.wanlichangmeng.tonglurendesign.fragment.UserFragment;
-import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 import com.wanlichangmeng.tonglurendesign.utils.BottomNavigationViewHelper;
 import com.wanlichangmeng.tonglurendesign.utils.ViewPagerHelper;
 
@@ -71,6 +59,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initView() {
+
+        //ActivityUtils.transparencyBar(this);
 
         //默认 >3 的选中效果会影响ViewPager的滑动切换时的效果，故利用反射去掉
         BottomNavigationViewHelper.disableShiftMode(navigation);
@@ -143,6 +133,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             public void onPageScrollStateChanged(int state) {
             }
         });
+
 
 
 
