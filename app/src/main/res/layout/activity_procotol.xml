@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="0dp"
+        android:background="@drawable/shadow"
+        android:orientation="horizontal">
+    <TextView
+        android:id="@+id/procotol_detail_content"
+        android:layout_width="320dp"
+        android:layout_height="500dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
+        android:textColor="#000000"
+        android:scrollbars="vertical"
+        android:singleLine="false"
+        />
+    </LinearLayout>
+    <!--busDetailContent=(TextView)findViewById(R.id.bus_detail_content);
+
+busDetailContent.setMovementMethod(ScrollingMovementMethod.getInstance());
+
+编译后就可以用TextView里面的文字滚动起来了。-->
+    <!--按钮-->
+    <!--layout_weight="1" layout_width="0dp"实现均分效果-->
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_refuse"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape_circle"
+            android:text="拒 绝"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btn_agree"
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape_circle"
+            android:text="同 意"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"/>
+    </LinearLayout>
+</LinearLayout>

@@ -7,8 +7,6 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
 
 
-
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <!--通用的字体大小颜色，不设置就会用这个-->

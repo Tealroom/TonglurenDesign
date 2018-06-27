@@ -8,8 +8,6 @@
     <dimen name="fab_margin">16dp</dimen>
 
 
-
-
     <!--定义APP统一的字体大小间距等start-->
     <dimen name="common_text_one">18sp</dimen>
     <dimen name="common_text_two">16sp</dimen>
