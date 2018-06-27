@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/login_1"
+    android:orientation="vertical">
+    <!--标题栏-->
+    <!--<include layout="@layout/main_title_bar"></include>-->
+    <TextView
+        android:id="@+id/welcome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="WELCOME"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_marginTop="140dp"
+        android:layout_marginLeft="130dp"
+       />
+    <!--显示头像+用户名输入框，记得加入id iv_head -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_head"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="40dp"
+            android:layout_gravity="center_horizontal"
+            android:scaleType="centerInside"
+            android:background="@mipmap/user1"/>
+        <!--输入框-->
+        <EditText
+            android:id="@+id/et_user_name"
+            android:layout_width="fill_parent"
+            android:layout_height="38dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="35dp"
+            android:layout_gravity="center_horizontal"
+
+            android:drawablePadding="10dp"
+            android:paddingLeft="0dp"
+            android:gravity="center_vertical"
+            android:hint="请输入用户名"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#a3a3a3"
+            android:textSize="14sp"/>
+    </LinearLayout>
+    <!--显示头像+密码输入框-->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-30dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/iv_pass"
+            android:layout_width="38dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="38dp"
+            android:layout_marginTop="0dp"
+            android:background="@mipmap/password1"
+            android:scaleType="centerInside" />
+
+        <EditText
+            android:id="@+id/et_psw"
+            android:layout_width="fill_parent"
+            android:layout_height="38dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="12dp"
+            android:layout_marginRight="35dp"
+            android:drawablePadding="10dp"
+            android:gravity="center_vertical"
+            android:hint="请输入密码"
+            android:inputType="textPassword"
+            android:paddingLeft="8dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#a3a3a3"
+            android:textSize="14sp" />
+    </LinearLayout>
+    <!--按钮-->
+    <!--layout_weight="1" layout_width="0dp"实现均分效果-->
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_weight="1"
+            android:background="@drawable/button_shape_circle"
+            android:text="注 册"
+            android:textColor="@android:color/background_dark"
+            android:onClick="RegitserClicked"
+            android:textSize="16sp"/>
+            <Button
+                android:id="@+id/btn_login"
+                android:layout_width="fill_parent"
+                android:layout_height="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginRight="35dp"
+                android:layout_weight="1"
+                android:background="@drawable/button_shape_circle"
+                android:text="登 录"
+                android:onClick="loginClicked"
+                android:textColor="@android:color/background_dark"
+                android:textSize="16sp"/>
+    </LinearLayout>
+    <!--显示tv register , find_psw -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginLeft="55dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/is_agree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="登录表示您已同意《同路人协议》"
+                android:textColorHint="#333"
+                android:textSize="14sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:layout_marginLeft="65dp"
+        android:layout_marginRight="35dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_height="1dp"
+            android:layout_width="80dp"
+            android:layout_marginTop="9dp"
+            android:background="#999" />
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="30dp"
+            android:textColor="#999"
+            android:text="第三方登录"/>
+        <TextView
+            android:layout_height="1dp"
+            android:layout_width="80dp"
+            android:layout_marginTop="9dp"
+            android:background="#999" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/btn_login_QQ"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="135dp"
+            android:layout_marginRight="35dp"
+
+            android:background="@mipmap/qq"
+
+            android:text=""
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btn_login_Weinxin"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="-34dp"
+            android:layout_marginRight="35dp"
+            android:layout_weight="1"
+            android:background="@mipmap/weixin"
+
+            android:textSize="16sp"/>
+        <Button
+            android:id="@+id/btn_login_Sina"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="-34dp"
+            android:layout_marginRight="35dp"
+            android:background="@mipmap/sina"
+
+            android:textSize="16sp"/>
+
+
+    </LinearLayout>
+</LinearLayout>
