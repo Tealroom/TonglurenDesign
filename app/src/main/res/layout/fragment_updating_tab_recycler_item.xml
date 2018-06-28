@@ -43,7 +43,7 @@
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/font340"
+            android:src="@drawable/font_368"
             app:layout_constraintRight_toRightOf="parent"/>
 
 
@@ -78,7 +78,7 @@
             android:id="@+id/foot_agree"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/like3"
+            android:src="@drawable/like"
             app:layout_constraintRight_toLeftOf="@+id/foot_right"/>
         <ImageView
             android:id="@+id/foot_message"
