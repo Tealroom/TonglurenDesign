@@ -85,6 +85,27 @@ public class ConditionSetFragment extends Fragment {
             }
         });
 
+        start_place.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                fragment2=new MapFragment();
+                //获取fragment管理器
+                FragmentManager fm = getFragmentManager();
+                //打开事务
+                FragmentTransaction ft = fm.beginTransaction();
+                //把内容显示至帧布局
+                ft.replace(R.id.fragment1_activity_condition_set, fragment2);
+                //将当前的事务添加到了回退栈
+                ft.addToBackStack(null);
+                //提交
+                ft.commit();
+//                //回退到Fragment1
+//                FragmentManager fm = getFragmentManager();
+//                //将当前的事务退出回退栈
+//                fm.popBackStack();
+            }
+        });
+
     }
 
 
