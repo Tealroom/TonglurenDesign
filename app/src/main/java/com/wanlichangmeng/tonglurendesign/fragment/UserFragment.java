@@ -6,15 +6,21 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewCompat;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.android.flexbox.FlexboxLayout;
 import com.wanlichangmeng.tonglurendesign.R;
+import com.wanlichangmeng.tonglurendesign.data.Label;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 import com.wanlichangmeng.tonglurendesign.utils.GlideImageLoader;
+import com.wanlichangmeng.tonglurendesign.utils.LabelUtils;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.youth.banner.Banner;
 
@@ -39,6 +45,8 @@ public class UserFragment extends Fragment  implements OnBannerListener {
     LinearLayout ll_bar4;
     @BindView(R.id.banner)
     Banner banner;
+    @BindView(R.id.fragment_user_label)
+    FlexboxLayout labelLayout;
 
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
@@ -49,7 +57,8 @@ public class UserFragment extends Fragment  implements OnBannerListener {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         ButterKnife.bind(this,view);
 
-        initView();
+        initBanner();
+        initLabel();
 
 
 
@@ -57,7 +66,7 @@ public class UserFragment extends Fragment  implements OnBannerListener {
         return view;
     }
 
-    private void initView() {
+    private void initBanner() {
 
         //放图片地址的集合
         list_path = new ArrayList<>();
@@ -95,6 +104,50 @@ public class UserFragment extends Fragment  implements OnBannerListener {
 
 
     }
+    public void initLabel(){
+        String[] tags = {"婚姻育儿", "散文", "设计", "上班这点事儿", "影视天堂", "大学生活", "美人说", "运动和健身", "工具癖", "生活家", "程序员", "想法", "短篇小说", "美食", "教育", "心理", "奇思妙想", "美食", "摄影"};
+
+        for (int i = 0; i < tags.length; i++) {
+            Label model = new Label();
+            model.setId(i);
+            model.setName(tags[i]);
+            labelLayout.addView(createNewFlexItemTextView(model));
+        }
+
+
+    }
+    /**
+     * 动态创建TextView
+     * @param label
+     * @return
+     */
+    private TextView createNewFlexItemTextView(final Label label) {
+        TextView textView = new TextView(this.getActivity());
+        textView.setGravity(Gravity.CENTER);
+        textView.setText(label.getName());
+        textView.setTextSize(12);
+        textView.setTextColor(getResources().getColor(R.color.colorAccent));
+        textView.setBackgroundResource(R.drawable.button_orange);
+        textView.setTag(label.getId());
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.e("you has a click", label.getName());
+            }
+        });
+        int padding = LabelUtils.dpToPixel(this.getActivity(), 4);
+        int paddingLeftAndRight = LabelUtils.dpToPixel(this.getActivity(), 8);
+        ViewCompat.setPaddingRelative(textView, paddingLeftAndRight, padding, paddingLeftAndRight, padding);
+        FlexboxLayout.LayoutParams layoutParams = new FlexboxLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        int margin = LabelUtils.dpToPixel(this.getActivity(), 6);
+        int marginTop = LabelUtils.dpToPixel(this.getActivity(), 16);
+        layoutParams.setMargins(margin, marginTop, margin, 0);
+        textView.setLayoutParams(layoutParams);
+        return textView;
+    }
+
     //轮播图的监听方法
     @Override
     public void OnBannerClick(int position) {

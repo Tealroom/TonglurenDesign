@@ -40,7 +40,8 @@
         <activity android:name=".activity.SplashActivity" />
         <activity android:name=".activity.LoginActivity" />
         <activity android:name=".activity.TripActivity" />
-        <activity android:name=".activity.SearchActivity"></activity>
+        <activity android:name=".activity.SearchActivity" />
+        <activity android:name=".activity.ConditionSetActivity"></activity>
     </application>
 
 </manifest>

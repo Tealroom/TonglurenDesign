@@ -53,6 +53,7 @@ import com.ruffian.library.widget.REditText;
 import com.ruffian.library.widget.RTextView;
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.TravelOverview;
+import com.wanlichangmeng.tonglurendesign.activity.ConditionSetActivity;
 import com.wanlichangmeng.tonglurendesign.activity.MainActivity;
 import com.wanlichangmeng.tonglurendesign.activity.SearchActivity;
 import com.wanlichangmeng.tonglurendesign.activity.TripActivity;
@@ -83,8 +84,11 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
     @BindView(R.id.fragment_home_btn_search)
     REditText btn_search;
 
+    @BindView(R.id.fragment_home_btn_set)
+    Button btn_set;
+
     @BindView(R.id.fragment_home_info_btn_retract)
-    Button btn1;
+    Button btn_retract;
 
     @BindView(R.id.fragment_home_info)
     LinearLayout info_window;
@@ -159,13 +163,25 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
             }
         });
         //绑定点击事件监听（这里用的是匿名内部类创建监听）
-        btn1.setOnClickListener(new View.OnClickListener(){
+        btn_retract.setOnClickListener(new View.OnClickListener(){
             int i = 0;
             public void onClick(View v) {
                 //Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
 
                 //toast.show();
                 info_window.setVisibility(View.GONE);
+            }
+        });
+        //绑定点击事件监听（这里用的是匿名内部类创建监听）
+        btn_set.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            public void onClick(View v) {
+                //Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
+
+                //toast.show();
+                Intent intent = new Intent(getActivity(), ConditionSetActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
             }
         });
 
@@ -179,95 +195,16 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
 
         initData();
 
-
-//        imageId.add(R.drawable.user12);
-//        imageId.add(R.drawable.user22);
-//        imageId.add(R.drawable.user32);
-//        imageId.add(R.drawable.user12);
-//        imageId.add(R.drawable.user22);
-//        imageId.add(R.drawable.user32);
-//        imageId.add(R.drawable.user12);
-//        imageId.add(R.drawable.user22);
-//        imageId.add(R.drawable.user32);
-//        imageId.add(R.drawable.user12);
-//        List<LatLng> position = new ArrayList<LatLng>();
-//        position.add(new LatLng(39.91746, 117.397481));
-//        position.add(new LatLng(39.92746, 116.396481));
-//        position.add(new LatLng(39.88250, 116.409468));
-//        position.add(new LatLng(39.87814, 116.191765));
-//        position.add(new LatLng(39.73481, 116.307089));
-//        position.add(new LatLng(39.78416, 116.399999));
-//        position.add(new LatLng(40.00779, 116.304431));
-//        position.add(new LatLng(40.01384, 116.396730));
-//        position.add(new LatLng(39.98383, 116.497937));
-//        position.add(new LatLng(39.98746, 116.366481));
-//
-//
-//
-//
-//        MarkerOptions markerOption1 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption2 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption3 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption4 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption5 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption6 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption7 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption8 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption9 = new MarkerOptions()
-//                .draggable(true);
-//        MarkerOptions markerOption10 = new MarkerOptions()
-//                .draggable(true);
-//
         ArrayList<MarkerOptions> markerOptionlst = new ArrayList<MarkerOptions>();
-//        markerOptionlst.add(markerOption1);
-//        markerOptionlst.add(markerOption2);
-//        markerOptionlst.add(markerOption3);
-//        markerOptionlst.add(markerOption4);
-//        markerOptionlst.add(markerOption5);
-//        markerOptionlst.add(markerOption6);
-//        markerOptionlst.add(markerOption7);
-//        markerOptionlst.add(markerOption8);
-//        markerOptionlst.add(markerOption9);
-//        markerOptionlst.add(markerOption10);
-
-
 
 
 
         for (int i=0;i<10;i++){
 
-            ;
             markerOptionlst.add(new MarkerOptions()
                     .draggable(true));
 
 
-
-//            Target target = new SimpleTarget<Bitmap>() {
-//                @Override
-//                public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//                    resource1 = resource;
-//                }
-//            };
-//
-//            //Bitmap suii = Glide.with(this).load(travelList.get(i).getAvatar()).apply(RequestOptions.bitmapTransform(new CircleCrop()));
-//            //Target<File> future =Glide.with(this).load(travelList.get(i).getAvatar()).into(target);
-//            Glide.with(this).load(travelList.get(i).getAvatar()).into(
-//                    new SimpleTarget<Bitmap>() {
-//                        @Override
-//                        public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
-//
-//                            marker.setIcon(BitmapDescriptorFactory.fromBitmap(i));
-//                        }
-//                    }
-//            );
 
             setGeniusIcon(travelList.get(i).getAvatar(),i);
             markerOptionlst.get(i).position(travelList.get(i).getPositon()).icon(BitmapDescriptorFactory.fromResource(R.drawable.user12));
