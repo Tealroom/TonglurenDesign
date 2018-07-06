@@ -12,17 +12,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
-import com.wanlichangmeng.tonglurendesign.MyApplication;
+import com.wanlichangmeng.tonglurendesign.base.MyApplication;
 import com.wanlichangmeng.tonglurendesign.R;
-import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentListAdapter;
-import com.wanlichangmeng.tonglurendesign.utils.Updating;
+//import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentListAdapter;
+import com.wanlichangmeng.tonglurendesign.adapter.UpdatingAdapter;
+import com.wanlichangmeng.tonglurendesign.data.Updating;
 //import com.youth.banner.Banner;
 //import com.youth.banner.listener.OnBannerListener;
 
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_DRAGGING;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 import static android.support.v7.widget.RecyclerView.SCROLL_STATE_SETTLING;
-import static android.support.v7.widget.RecyclerView.VERTICAL;
 
 
 import java.util.ArrayList;
@@ -52,7 +52,7 @@ public class TabFragment extends Fragment {
     @BindView(R.id.swipeRefreshLayout)
     protected SwipeRefreshLayout swipeRefreshLayout;
 
-    private TabFragmentListAdapter adapter;
+    private UpdatingAdapter adapter;
     private List<Updating> data;
     private RecyclerView.OnScrollListener mOnScrollListener;
 
@@ -87,7 +87,7 @@ public class TabFragment extends Fragment {
 
         //动态列表
         data = new ArrayList<>();
-        adapter = new TabFragmentListAdapter(MyApplication.getInstance(), data);
+        adapter = new UpdatingAdapter(MyApplication.getInstance(), data);
         swipeRefreshLayout.setColorSchemeResources(R.color.colorBlueStatus);
         swipeRefreshLayout.post(new Runnable() {
             @Override
@@ -159,6 +159,7 @@ public class TabFragment extends Fragment {
             if (i == 9) {
                 isLoading = false;
                 adapter.notifyDataSetChanged();
+                //adapter.notifyItemRangeInserted(curSize, allContacts.size() - 1);
                 swipeRefreshLayout.setRefreshing(false);
                 adapter.notifyItemRemoved(adapter.getItemCount());
                 Log.e("vvv","===========total: "+data.size());

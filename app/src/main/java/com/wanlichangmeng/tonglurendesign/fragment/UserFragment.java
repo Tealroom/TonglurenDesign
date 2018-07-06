@@ -2,6 +2,7 @@ package com.wanlichangmeng.tonglurendesign.fragment;
 
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -17,6 +18,9 @@ import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
 import com.wanlichangmeng.tonglurendesign.R;
+import com.wanlichangmeng.tonglurendesign.activity.ChatActivity;
+import com.wanlichangmeng.tonglurendesign.activity.ListActivity;
+import com.wanlichangmeng.tonglurendesign.activity.SearchActivity;
 import com.wanlichangmeng.tonglurendesign.data.Label;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 import com.wanlichangmeng.tonglurendesign.utils.GlideImageLoader;
@@ -41,15 +45,46 @@ import butterknife.ButterKnife;
  */
 public class UserFragment extends Fragment  implements OnBannerListener {
 
-    @BindView(R.id.ll_bar4)
-    LinearLayout ll_bar4;
+    @BindView(R.id.head1_ll_bar4)
+    LinearLayout head1_ll_bar4;
+    @BindView(R.id.head2_ll_bar4)
+    LinearLayout head2_ll_bar4;
     @BindView(R.id.banner)
     Banner banner;
     @BindView(R.id.fragment_user_label)
     FlexboxLayout labelLayout;
 
+    @BindView(R.id.head1)
+    View head1;
+    @BindView(R.id.head2)
+    View head2;
+    @BindView(R.id.operation1)
+    View operation1;
+    @BindView(R.id.operation2)
+    View operation2;
+
+
+    @BindView(R.id.operation1_btn1)
+    LinearLayout operation1_btn1;
+    @BindView(R.id.operation1_btn2)
+    LinearLayout operation1_btn2;
+    @BindView(R.id.operation1_btn3)
+    LinearLayout operation1_btn3;
+    @BindView(R.id.operation1_btn4)
+    LinearLayout operation1_btn4;
+
+
+    @BindView(R.id.operation2_btn1)
+    LinearLayout operation2_btn1;
+    @BindView(R.id.operation2_btn2)
+    LinearLayout operation2_btn2;
+    @BindView(R.id.operation2_btn3)
+    LinearLayout operation2_btn3;
+
     private ArrayList<String> list_path;
     private ArrayList<String> list_title;
+
+    private String type;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -57,6 +92,14 @@ public class UserFragment extends Fragment  implements OnBannerListener {
         View view = inflater.inflate(R.layout.fragment_user, container, false);
         ButterKnife.bind(this,view);
 
+        if(getArguments()!=null){
+            type = getArguments().getString("type");
+        }
+
+
+        initListener();
+        initView();
+        Log.e("user_fragment_type",type);
         initBanner();
         initLabel();
 
@@ -66,6 +109,98 @@ public class UserFragment extends Fragment  implements OnBannerListener {
         return view;
     }
 
+    public void initListener(){
+
+        operation1_btn1.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","updating_myself");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        operation1_btn2.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","application_to_me");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        operation1_btn3.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","application_to_other");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        operation1_btn4.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","plan_myself");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+        operation2_btn1.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","updating_others");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        operation2_btn2.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("list_type","plan_others");
+                Intent intent = new Intent(getActivity(), ListActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+        operation2_btn3.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                //这里应该先判断两者是不是好友。实际到底传的是什么参数倒是无所谓。这里的参数应该和message里面的ChatItemAdapter一致
+                bundle.putString("user","user1");
+                Intent intent = new Intent(getActivity(), ChatActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
+
+    }
+    private void initView(){
+        if(type=="others"){
+            head1.setVisibility(View.GONE);
+            head2.setVisibility(View.VISIBLE);
+            operation1.setVisibility(View.GONE);
+            operation2.setVisibility(View.VISIBLE);
+
+        }
+    }
     private void initBanner() {
 
         //放图片地址的集合
@@ -158,12 +293,29 @@ public class UserFragment extends Fragment  implements OnBannerListener {
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onResume() {
-        ActivityUtils.initStateInFragment(this,ll_bar4);
+
+        if(type=="others"){
+            ActivityUtils.initStateInFragment(this,head2_ll_bar4);
+            Log.e("show","22222222222222222");
+        }else{
+            ActivityUtils.initStateInFragment(this,head1_ll_bar4);
+            Log.e("show","11111111111111111");
+        }
+
 //        SystemBarTintManager tintManager = new SystemBarTintManager(getActivity());
 //        tintManager.setStatusBarTintEnabled(true);
 //        tintManager.setStatusBarTintResource(R.color.colorPrimary);//设置系统状态栏颜色
 //        tintManager.setStatusBarTintDrawable(getResources().getDrawable(R.drawable.mybgcolor_02));//设置系统状态栏背景图
         super.onResume();
+    }
+
+    public static  UserFragment newInstance(String type){
+        UserFragment fragmentOne = new UserFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("type", type);
+        //fragment保存参数，传入一个Bundle对象
+        fragmentOne.setArguments(bundle);
+        return fragmentOne;
     }
 
 

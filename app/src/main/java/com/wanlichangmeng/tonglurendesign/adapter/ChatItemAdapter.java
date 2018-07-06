@@ -1,17 +1,16 @@
 package com.wanlichangmeng.tonglurendesign.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.provider.ContactsContract;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -19,22 +18,19 @@ import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.bumptech.glide.request.target.SimpleTarget;
-import com.bumptech.glide.request.transition.Transition;
-import com.wanlichangmeng.tonglurendesign.MyApplication;
+import com.wanlichangmeng.tonglurendesign.activity.ChatActivity;
+import com.wanlichangmeng.tonglurendesign.base.MyApplication;
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.utils.BGABadgeInit;
-import com.wanlichangmeng.tonglurendesign.utils.Conversation;
-import com.wanlichangmeng.tonglurendesign.utils.UserInfo;
+import com.wanlichangmeng.tonglurendesign.data.Conversation;
+import com.wanlichangmeng.tonglurendesign.data.UserInfo;
 
 import java.util.List;
 
 
 import cn.bingoogolapple.badgeview.BGABadgeLinearLayout;
-import cn.bingoogolapple.badgeview.BGABadgeRelativeLayout;
 import cn.bingoogolapple.badgeview.annotation.BGABadge;
 
 @BGABadge({
@@ -59,9 +55,12 @@ public class ChatItemAdapter extends RecyclerView.Adapter<ChatItemAdapter.ViewHo
 
     private List<UserInfo> userInfoList;
 
+    private Context context;
+
 
 
     public ChatItemAdapter(Context context, List<Conversation> conversationList, List<UserInfo> userInfoList) {
+        this.context = context;
         this.inflater = LayoutInflater.from(context);
         this.conversationList = conversationList;
         this.userInfoList = userInfoList;
@@ -91,6 +90,8 @@ public class ChatItemAdapter extends RecyclerView.Adapter<ChatItemAdapter.ViewHo
         viewHolder.content = (TextView) convertView.findViewById(R.id.chat_item_content);
             //viewHolder.messageNum =  convertView.findViewById(R.id.chat_item_message_num);
         viewHolder.chatItrm =  convertView.findViewById(R.id.chat_item_self);
+        viewHolder.ll_item =  convertView.findViewById(R.id.ll_item);
+
         new BGABadgeInit();
 
 
@@ -163,6 +164,8 @@ public class ChatItemAdapter extends RecyclerView.Adapter<ChatItemAdapter.ViewHo
 
         private BGABadgeLinearLayout chatItrm;
 
+        private LinearLayout ll_item;
+
 
 
         private void init(Conversation item) {
@@ -188,6 +191,18 @@ public class ChatItemAdapter extends RecyclerView.Adapter<ChatItemAdapter.ViewHo
                 chatItrm.showCirclePointBadge();
                 chatItrm.showTextBadge(unread + "");
             }
+            ll_item.setOnClickListener(new View.OnClickListener(){
+                int i = 0;
+                Bundle bundle = new Bundle();
+                public void onClick(View v) {
+                    //这里传参应该是不一样的。
+                    bundle.putString("user","user1");
+                    Intent intent = new Intent(context, ChatActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtras(bundle);
+                    context.startActivity(intent);
+                }
+            });
         }
 
 

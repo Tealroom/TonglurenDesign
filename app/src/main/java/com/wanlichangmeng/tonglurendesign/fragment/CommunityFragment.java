@@ -2,6 +2,7 @@ package com.wanlichangmeng.tonglurendesign.fragment;
 
 
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -19,6 +20,8 @@ import android.widget.PopupWindow;
 
 import com.amap.api.maps.MapView;
 import com.wanlichangmeng.tonglurendesign.R;
+import com.wanlichangmeng.tonglurendesign.activity.ListActivity;
+import com.wanlichangmeng.tonglurendesign.activity.UpdatingActivity;
 import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentAdapter;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 
@@ -43,8 +46,8 @@ public class CommunityFragment extends Fragment  implements View.OnClickListener
     @BindView(R.id.tab_viewpager)
     ViewPager tabViewpager;
     Unbinder unbinder;
-    @BindView(R.id.iv_fenlei)
-    ImageView mIvFenlei;
+    @BindView(R.id.iv_new_updating)
+    ImageView mIvNewUpdating;
     @BindView(R.id.ll_bar4)
     LinearLayout ll_bar4;
 
@@ -74,7 +77,17 @@ public class CommunityFragment extends Fragment  implements View.OnClickListener
     }
 
     private void initView(View view) {
-        mIvFenlei.setOnClickListener(this);
+        mIvNewUpdating.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            Bundle bundle = new Bundle();
+            public void onClick(View v) {
+                bundle.putString("new_or_content","new");
+                Intent intent = new Intent(getActivity(), UpdatingActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
         tablayout.removeAllTabs();
         tabViewpager.removeAllViews();
         if (mFragmentArrays != null) {
@@ -105,11 +118,11 @@ public class CommunityFragment extends Fragment  implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.iv_fenlei:
-                startPopuwindows(view);
-                break;
-        }
+//        switch (view.getId()) {
+//            case R.id.iv_new_updating:
+//                startPopuwindows(view);
+//                break;
+//        }
     }
 
     private void startPopuwindows(View view1) {

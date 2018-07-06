@@ -55,8 +55,10 @@ import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.TravelOverview;
 import com.wanlichangmeng.tonglurendesign.activity.ConditionSetActivity;
 import com.wanlichangmeng.tonglurendesign.activity.MainActivity;
+import com.wanlichangmeng.tonglurendesign.activity.PersonalActivity;
 import com.wanlichangmeng.tonglurendesign.activity.SearchActivity;
 import com.wanlichangmeng.tonglurendesign.activity.TripActivity;
+import com.wanlichangmeng.tonglurendesign.activity.TripDetailActivity;
 import com.wanlichangmeng.tonglurendesign.adapter.TabFragmentAdapter;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
 
@@ -90,8 +92,14 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
     @BindView(R.id.fragment_home_info_btn_retract)
     Button btn_retract;
 
+
+
     @BindView(R.id.fragment_home_info)
     LinearLayout info_window;
+
+
+    @BindView(R.id.fragment_home_info_tripdetail)
+    LinearLayout fragment_home_info_tripdetail;
 
     @BindView(R.id.fragment_home_info_avatar)
     ImageView infoAvatar;
@@ -180,6 +188,29 @@ public class HomeFragment extends Fragment implements AMap.InfoWindowAdapter,AMa
 
                 //toast.show();
                 Intent intent = new Intent(getActivity(), ConditionSetActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+        //绑定点击事件监听（这里用的是匿名内部类创建监听）
+        infoAvatar.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            public void onClick(View v) {
+                //Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
+
+                //toast.show();
+                Intent intent = new Intent(getActivity(), PersonalActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                startActivity(intent);
+            }
+        });
+        fragment_home_info_tripdetail.setOnClickListener(new View.OnClickListener(){
+            int i = 0;
+            public void onClick(View v) {
+                //Toast toast = Toast.makeText(getActivity().getApplicationContext(),"你点击了"+(++i)+"次", Toast.LENGTH_LONG);//提示被点击了
+
+                //toast.show();
+                Intent intent = new Intent(getActivity(), TripDetailActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivity(intent);
             }

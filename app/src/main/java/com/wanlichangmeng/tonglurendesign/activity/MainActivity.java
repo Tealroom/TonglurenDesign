@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         adapter.addFragment(new HomeFragment());
         adapter.addFragment(new CommunityFragment());
         adapter.addFragment(new MessageFragment());
-        adapter.addFragment(new UserFragment());
+        adapter.addFragment(UserFragment.newInstance("myself"));
         viewpager.setAdapter(adapter);
         viewpager.setScanScroll(false);
         viewpager.setOffscreenPageLimit(4);//viewpager缓存的个数，默认是2，表示前后各一个

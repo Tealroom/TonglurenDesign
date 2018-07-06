@@ -1,13 +1,7 @@
 package com.wanlichangmeng.tonglurendesign.fragment;
 
-import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,20 +9,13 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.amap.api.maps.MapView;
-import com.wanlichangmeng.tonglurendesign.MyApplication;
-import com.wanlichangmeng.tonglurendesign.adapter.ChatItemAdapter.ViewHolder;
 import com.wanlichangmeng.tonglurendesign.R;
 import com.wanlichangmeng.tonglurendesign.adapter.ChatItemAdapter;
 import com.wanlichangmeng.tonglurendesign.utils.ActivityUtils;
-import com.wanlichangmeng.tonglurendesign.utils.Conversation;
-import com.wanlichangmeng.tonglurendesign.utils.UserInfo;
+import com.wanlichangmeng.tonglurendesign.data.Conversation;
+import com.wanlichangmeng.tonglurendesign.data.UserInfo;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenu;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuBridge;
 import com.yanzhenjie.recyclerview.swipe.SwipeMenuCreator;
@@ -38,11 +25,8 @@ import com.yanzhenjie.recyclerview.swipe.SwipeMenuRecyclerView;
 import com.yanzhenjie.recyclerview.swipe.touch.OnItemMoveListener;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
